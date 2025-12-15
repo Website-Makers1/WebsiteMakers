@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Website Makers - Plan Je Perfecte Website</title>
+<style>
+/* Pagina item fix */
+.pages-section .page-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.pages-section input[type="text"] {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: 2px solid rgba(245, 245, 220, 0.2);
+    background: rgba(255,255,255,0.1);
+    color: #f5f5dc;
+    margin-right: 0.5rem;
+    min-width:0;
+}
+.pages-section .remove-btn {
+    width:100px;
+    flex: 0 0 auto;
+    padding: 0.01rem 0,1rem;
+    color: #f5f5dc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+/* Kleurenkiezer zichtbaar */
+.color-picker-group input[type="color"] {
+    margin-right:0.5rem;
+    width:50px;
+    height:50px;
+    border:none;
+    cursor:pointer;
+}
+.color-picker-group input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.color-picker-group input[type="color"]::-webkit-color-swatch {
+    border: 2px solid #16213e;
+    border-radius:5px;
+}
+
+/* Optioneel voor Firefox */
+.color-picker-group input[type="color"]::-moz-color-swatch {
+    border: 2px solid #16213e;
+    border-radius:5px;
+}
+/* Website Type dropdown kleur fix */
+select[name="type"] {
+    color: #16213e; /* donkerblauw */
+    background-color: #f5f5dc; /* optioneel, lichte achtergrond */
+}
+
+/* Zorg dat de opties ook leesbaar zijn */
+select[name="type"] option {
+    color: #16213e; /* donkerblauw */
+    background-color: #f5f5dc; /* optioneel, zelfde als select */
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<div class="header-content">
+    <div class="logo-section">
+        <div class="logo-placeholder">
+            <img src="images/logo.png" style="width: 90px;">
+        </div>
+        <div class="logo-text">
+            <h1 id="title-main">Website Makers</h1>
+            <p id="subtitle-main">Jouw Website, Onze Expertise</p>
+        </div>
+    </div>
+    <nav>
+        <a href="home.html" id="nav-home">Home</a>
+        <a href="ideas.html" id="nav-ideas">Ideas</a>
+        <a href="contact.html" id="nav-contact">Contact</a>
+        <select id="languageSelect">
+            <option value="nl">NL</option>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+            <option value="de">DE</option>
+        </select>
+    </nav>
+</div>
+</header>
+
+<section class="hero" id="home">
+<h2 id="hero-title">Plan Je Droomwebsite</h2>
+<p id="hero-text">Ontwerp je perfecte website met onze interactieve planner en laat ons het voor je bouwen</p>
+<button class="cta-button" id="hero-button" onclick="startPlanner()">Start Met Plannen</button>
+</section>
+
+<section class="planner-section" id="planner-content">
+<div class="planner-container">
+    <div class="planner-header">
+        <h3 id="planner-title">Website Planner</h3>
+        <p id="planner-subtitle" style="color: #f5f5dc; opacity: 0.8;">Vul alle velden in om je website te plannen</p>
+    </div>
+
+    <form id="websitePlan" action="https://formspree.io/f/xovgzenw" method="POST">
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Bedrijfsnaam *</label>
+                <input type="text" name="bedrijfsnaam" required placeholder="Bijv. Mijn Bedrijf BV">
+            </div>
+            <div class="form-group">
+                <label>Jouw Naam *</label>
+                <input type="text" name="naam" required placeholder="Voor- en achternaam">
+            </div>
+            <div class="form-group">
+                <label>E-mailadres *</label>
+                <input type="email" name="email" required placeholder="jouw@email.nl">
+            </div>
+            <div class="form-group">
+                <label>Telefoonnummer</label>
+                <input type="tel" name="telefoon" placeholder="+31 6 12345678">
+            </div>
+            <div class="form-group full-width">
+                <label>Website Doel *</label>
+                <textarea name="doel" required placeholder="Beschrijf waarvoor je de website wilt gebruiken..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Website Type *</label>
+                <select name="type" required>
+                    <option value="">Selecteer type</option>
+                    <option value="portfolio">Portfolio</option>
+                    <option value="bedrijf">Bedrijfswebsite</option>
+                    <option value="webshop">Webshop</option>
+                    <option value="blog">Blog</option>
+                    <option value="landing">Landing Page</option>
+                    <option value="anders">Anders</option>
+                </select>
+            </div>
+
+            <div class="form-group full-width">
+    <label>Budget</label>
+
+    <button type="button" class="budget-toggle" onclick="toggleBudget()">
+        💰 Kies je budget
+    </button>
+
+    <div id="budgetOptions" style="display:none; margin-top:1rem;">
+        <label>
+            <input type="radio" name="budget" value="300-500"> €300 – €500
+        </label><br>
+        <label>
+            <input type="radio" name="budget" value="600-1000"> €600 – €1000
+        </label><br>
+        <label>
+            <input type="radio" name="budget" value="1800-3000"> €1800 – €3000
+        </label><br>
+        <label>
+            <input type="radio" name="budget" value="5000+"> €5000+
+        </label>
+    </div>
+</div>
+
+            <div class="form-group">
+                <label>Gewenste Kleurthema</label>
+                <div class="color-picker-group">
+                    <input type="color" class="color-input" name="kleur1" value="#f5f5dc">
+                    <input type="color" class="color-input" name="kleur2" value="#16213e">
+                    <input type="color" class="color-input" name="kleur3" value="#0f3460">
+                </div>
+            </div>
+            <div class="form-group full-width">
+                <label>Pagina's</label>
+                <div class="pages-section" id="pagesContainer">
+                    <div class="page-item">
+                        <input type="text" name="page[]" placeholder="Bijv. Home">
+                        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Verwijder</button>
+                    </div>
+                </div>
+                <button type="button" class="add-page-btn" onclick="addPage()">+ Pagina Toevoegen</button>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button type="button" class="btn btn-download" onclick="downloadPlan()">📥 Download Plan</button>
+            <button type="submit" class="btn btn-send">
+            📧 Verstuur Naar Website Makers
+            </button>
+        </div>
+    </form>
+</div>
+</section>
+
+<div class="modal" id="successModal">
+    <div class="modal-content">
+        <h4 id="modal-title">✅ Succesvol Verzonden!</h4>
+        <p id="modal-text">Je website plan is naar ons verzonden. We nemen zo snel mogelijk contact met je op!</p>
+        <button class="modal-btn" id="modal-button" onclick="closeModal()">Sluiten</button>
+    </div>
+</div>
+
+<footer id="contact">
+    <p id="footer-text">&copy; 2024 Website Makers. Alle rechten voorbehouden.</p>
+    <p style="margin-top: 0.5rem; opacity: 0.8;">Contact: info@websitemakers.nl |</p>
+</footer>
+
+<script>
+function startPlanner(){
+    document.getElementById('planner-content').classList.add('active');
+    document.getElementById('planner-content').scrollIntoView({behavior:'smooth'});
+    setLanguage(document.getElementById("languageSelect").value);
+}
+
+function addPage(){
+    const container=document.getElementById('pagesContainer');
+    const pageItem=document.createElement('div');
+    pageItem.className='page-item';
+    pageItem.innerHTML=`
+        <input type="text" name="page[]" placeholder="Pagina naam">
+        <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Verwijder</button>
+    `;
+    container.appendChild(pageItem);
+}
+
+function downloadPlan(){
+    const form=document.getElementById('websitePlan');
+    const formData=new FormData(form);
+    let planText='=== WEBSITE PLAN ===\n\n';
+    for(let [key,value] of formData.entries()){
+        if(key==='page[]') continue;
+        const label=form.querySelector(`[name="${key}"]`)?.previousElementSibling?.textContent || key;
+        planText+=`${label}: ${value}\n`;
+    }
+    const pages=formData.getAll('page[]').filter(p=>p.trim());
+    if(pages.length>0) planText+=`\nPagina's:\n${pages.map((p,i)=>`${i+1}. ${p}`).join('\n')}`;
+    const blob=new Blob([planText],{type:'text/plain'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='website-plan.txt'; a.click();
+    URL.revokeObjectURL(url);
+}
+
+function sendPlan(){
+    const form=document.getElementById('websitePlan');
+    if(!form.checkValidity()){form.reportValidity();return;}
+    document.getElementById('successModal').classList.add('active');
+}
+function closeModal(){document.getElementById('successModal').classList.remove('active');}
+
+const translations={
+nl:{title:"Website Makers", subtitle:"Jouw Website, Onze Expertise", home:"Home", ideas:"Ideas", contact:"Contact",
+heroTitle:"Plan Je Droomwebsite", heroText:"Ontwerp je perfecte website met onze interactieve planner en laat ons het voor je bouwen", heroButton:"Start Met Plannen",
+plannerTitle:"Website Planner", plannerSubtitle:"Vul alle velden in om je website te plannen",
+modalTitle:"✅ Succesvol Verzonden!", modalText:"Je website plan is naar ons verzonden. We nemen zo snel mogelijk contact met je op!", modalButton:"Sluiten",
+footer:"© 2024 Website Makers. Alle rechten voorbehouden."},
+en:{title:"Website Makers", subtitle:"Your Website, Our Expertise", home:"Home", ideas:"Ideas", contact:"Contact",
+heroTitle:"Plan Your Dream Website", heroText:"Design your perfect website using our interactive planner", heroButton:"Start Planning",
+plannerTitle:"Website Planner", plannerSubtitle:"Fill in all fields to plan your website",
+modalTitle:"✅ Successfully Sent!", modalText:"Your website plan has been sent. We will contact you soon!", modalButton:"Close",
+footer:"© 2024 Website Makers. All rights reserved."},
+es:{title:"Creadores Web", subtitle:"Tu sitio web, nuestra experiencia", home:"Inicio", ideas:"Ideas", contact:"Contacto",
+heroTitle:"Planifica Tu Sitio Web", heroText:"Diseña tu sitio web perfecto con nuestro planificador", heroButton:"Empezar",
+plannerTitle:"Planificador Web", plannerSubtitle:"Completa todos los campos",
+modalTitle:"✅ ¡Enviado!", modalText:"Tu plan ha sido enviado. Nos pondremos en contacto pronto.", modalButton:"Cerrar",
+footer:"© 2024 Creadores Web. Todos los derechos reservados."},
+de:{title:"Website Entwickler", subtitle:"Ihre Website, unsere Expertise", home:"Startseite", ideas:"Ideen", contact:"Kontakt",
+heroTitle:"Planen Sie Ihre Website", heroText:"Gestalten Sie Ihre perfekte Website mit unserem Planer", heroButton:"Jetzt planen",
+plannerTitle:"Website Planer", plannerSubtitle:"Bitte alle Felder ausfüllen",
+modalTitle:"✅ Erfolgreich gesendet!", modalText:"Ihr Website-Plan wurde gesendet. Wir melden uns bald!", modalButton:"Schließen",
+footer:"© 2024 Website Entwickler. Alle Rechte vorbehalten."}
+};
+
+function setLanguage(lang){
+    const t=translations[lang];
+    document.getElementById("title-main").textContent=t.title;
+    document.getElementById("subtitle-main").textContent=t.subtitle;
+    document.getElementById("nav-home").textContent=t.home;
+    document.getElementById("nav-ideas").textContent=t.ideas;
+    document.getElementById("nav-contact").textContent=t.contact;
+    document.getElementById("hero-title").textContent=t.heroTitle;
+    document.getElementById("hero-text").textContent=t.heroText;
+    document.getElementById("hero-button").textContent=t.heroButton;
+    document.getElementById("planner-title").textContent=t.plannerTitle;
+    document.getElementById("planner-subtitle").textContent=t.plannerSubtitle;
+    document.getElementById("modal-title").textContent=t.modalTitle;
+    document.getElementById("modal-text").textContent=t.modalText;
+    document.getElementById("modal-button").textContent=t.modalButton;
+    document.getElementById("footer-text").textContent=t.footer;
+}
+
+document.getElementById("languageSelect").addEventListener("change", function(){
+    setLanguage(this.value);
+});
+
+function toggleBudget(){
+    const el = document.getElementById("budgetOptions");
+    el.style.display = el.style.display === "none" ? "block" : "none";
+}
+
+</script>
+
+</body>
+</html>

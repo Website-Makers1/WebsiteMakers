@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Makers - Plan Je Perfecte Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #16213e, #0f3460);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 3px solid #ffffff;
+        }
+
+        .logo-text h1 {
+            color: #16213e;
+            font-size: 2rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #16213e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ✅ TOEGEVOEGD: taalkeuze */
+        .language-switch {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #16213e;
+            background: #ffffff;
+            color: #16213e;
+            font-weight: 600;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .gallery-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-header h3 {
+            font-size: 2.5rem;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 30px;
+            border: 2px solid #16213e;
+            font-size: 1rem;
+            outline: none;
+            background: #ffffff;
+            color: #16213e;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .thumb {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .meta {
+            padding: 15px;
+        }
+
+        .title {
+            font-weight: bold;
+            color: #16213e;
+        }
+
+        .badge {
+            background: #0f3460;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="logo-section">
+            <div class="logo-placeholder">
+            <img src="images/logo.png" style="width: 90px;">
+        </div>
+            <div class="logo-text">
+                <h1 id="title-main">Website Makers</h1>
+                <p id="subtitle-main">Jouw Website, Onze Expertise</p>
+            </div>
+        </div>
+        <nav>
+            <a href="home.html" id="nav-home">Home</a>
+            <a href="ideas.html" id="nav-ideas">Ideas</a>
+            <a href="contact.html" id="nav-contact">Contact</a>
+
+            <!-- ✅ TOEGEVOEGD -->
+            <select class="language-switch" onchange="setLanguage(this.value)">
+                <option value="nl">NL</option>
+                <option value="en">EN</option>
+                <option value="es">ES</option>
+                <option value="de">DE</option>
+            </select>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <h2 id="hero-title">Ontdek Onze Website Portfolio</h2>
+    <p id="hero-text">Bekijk 50 voorbeelden van prachtige websites die wij hebben gemaakt</p>
+</section>
+
+<section class="gallery-section">
+    <div class="gallery-header">
+        <h3 id="gallery-title">Portfolio Galerij</h3>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Zoek op titel, type, kleur of stijl..." onkeyup="filterGallery()">
+    </div>
+
+    <div class="gallery" id="galleryGrid"></div>
+</section>
+
+<footer>
+    <p id="footer-text">&copy; 2024 Website Makers</p>
+</footer>
+
+<script>
+    /* =====================
+       BESTAANDE CODE
+       ===================== */
+
+    const websites = [ /* ← ongewijzigd, exact jouw array */ 
+        { title: "Luxe Webshop", type: "webshop", color: "Donkerblauw", style: "Minimal" },
+        { title: "Tech Blog", type: "blog", color: "Cyaan", style: "Modern" },
+        { title: "Creative Portfolio", type: "portfolio", color: "Oranje", style: "Bold" },
+        { title: "Restaurant Site", type: "info", color: "Rood", style: "Elegant" },
+        { title: "Fashion Store", type: "webshop", color: "Roze", style: "Chic" },
+        { title: "Fotografie Portfolio", type: "portfolio", color: "Zwart", style: "Minimal" },
+        { title: "Fitness Blog", type: "blog", color: "Groen", style: "Energiek" },
+        { title: "Architectuur Bureau", type: "info", color: "Grijs", style: "Modern" },
+        { title: "Online Boekwinkel", type: "webshop", color: "Bruin", style: "Klassiek" },
+        { title: "Reisblog", type: "blog", color: "Blauw", style: "Avontuurlijk" },
+        { title: "Muziek Producer", type: "portfolio", color: "Paars", style: "Creatief" },
+        { title: "Bakkerij Website", type: "info", color: "Geel", style: "Warm" },
+        { title: "Sport Webshop", type: "webshop", color: "Rood", style: "Dynamisch" },
+        { title: "Design Studio", type: "portfolio", color: "Wit", style: "Clean" },
+        { title: "Food Blog", type: "blog", color: "Oranje", style: "Smaakvol" },
+        { title: "Advocatenkantoor", type: "info", color: "Marineblauw", style: "Professioneel" },
+        { title: "Kunst Galerie", type: "portfolio", color: "Goud", style: "Luxe" },
+        { title: "Electronica Shop", type: "webshop", color: "Zwart", style: "Tech" },
+        { title: "Lifestyle Blog", type: "blog", color: "Roze", style: "Trendy" },
+        { title: "Tandartspraktijk", type: "info", color: "Lichtblauw", style: "Vriendelijk" },
+        { title: "Sieradenwinkel", type: "webshop", color: "Zilver", style: "Elegant" },
+        { title: "Gaming Blog", type: "blog", color: "Neongroen", style: "Futuristisch" },
+        { title: "Marketing Bureau", type: "info", color: "Turquoise", style: "Innovatief" },
+        { title: "Vintage Kleding", type: "webshop", color: "Sepia", style: "Retro" },
+        { title: "Interieur Designer", type: "portfolio", color: "Beige", style: "Sophisticated" },
+        { title: "Yoga Studio", type: "info", color: "Mintgroen", style: "Zen" },
+        { title: "Cosmetica Shop", type: "webshop", color: "Lila", style: "Elegant" },
+        { title: "Travel Vlog", type: "blog", color: "Oceaanblauw", style: "Inspirerend" },
+        { title: "Autogarage", type: "info", color: "Rood", style: "Robuust" },
+        { title: "Bio Voeding", type: "webshop", color: "Groen", style: "Natuurlijk" },
+        { title: "3D Artist Portfolio", type: "portfolio", color: "Cyaan", style: "Futuristisch" },
+        { title: "Koffie Blog", type: "blog", color: "Bruin", style: "Gezellig" },
+        { title: "Event Planning", type: "info", color: "Goud", style: "Feestelijk" },
+        { title: "Sneaker Store", type: "webshop", color: "Neonorange", style: "Urban" },
+        { title: "Filmmaker Portfolio", type: "portfolio", color: "Zwart", style: "Cinematisch" },
+        { title: "Wellness Center", type: "info", color: "Lavendel", style: "Kalmerend" },
+        { title: "Baby Shop", type: "webshop", color: "Pastelroze", style: "Zacht" },
+        { title: "Tech Review Blog", type: "blog", color: "Grijs", style: "Modern" },
+        { title: "Kapper Salon", type: "info", color: "Fuchsia", style: "Stijlvol" },
+        { title: "Handgemaakte Crafts", type: "webshop", color: "Terracotta", style: "Ambachtelijk" },
+        { title: "Graphic Designer", type: "portfolio", color: "Regenboog", style: "Creatief" },
+        { title: "Crypto Blog", type: "blog", color: "Goud", style: "Digitaal" },
+        { title: "Dierenartspraktijk", type: "info", color: "Groen", style: "Vriendelijk" },
+        { title: "Luxe Horloges", type: "webshop", color: "Zwart/Goud", style: "Premium" },
+        { title: "Illustrator Portfolio", type: "portfolio", color: "Pastel", style: "Artistiek" },
+        { title: "Sustainable Living", type: "blog", color: "Olijfgroen", style: "Eco" },
+        { title: "Accounting Firm", type: "info", color: "Donkerblauw", style: "Betrouwbaar" },
+        { title: "Plant Webshop", type: "webshop", color: "Bosgroen", style: "Botanisch" },
+        { title: "Street Photography", type: "portfolio", color: "Zwart-wit", style: "Raw" },
+        { title: "DIY Crafts Blog", type: "blog", color: "Kleurrijk", style: "Creatief" }
+    ];
+
+    function generateWebsiteCards() {
+        const gallery = document.getElementById('galleryGrid');
+        websites.forEach((site, index) => {
+            const card = document.createElement('article');
+            card.className = 'card';
+            card.innerHTML = `
+                <img class="thumb" src="images/site${index + 1}.jpg">
+                <div class="meta">
+                    <span class="badge">${site.type}</span>
+                    <div class="title">${site.title}</div>
+                    <div>${site.color} · ${site.style}</div>
+                </div>
+            `;
+            gallery.appendChild(card);
+        });
+    }
+
+    function filterGallery() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach((card, i) => {
+            const site = websites[i];
+            const text = `${site.title} ${site.type} ${site.color} ${site.style}`.toLowerCase();
+            card.style.display = text.includes(query) ? 'block' : 'none';
+        });
+    }
+
+    generateWebsiteCards();
+
+    /* =====================
+       ✅ TOEGEVOEGD: TAALSYSTEEM
+       ===================== */
+
+    const translations = {
+        nl: {
+            title: "Website Makers",
+            subtitle: "Jouw Website, Onze Expertise",
+            home: "Home",
+            ideas: "Ideas",
+            contact: "Contact",
+            heroTitle: "Ontdek Onze Website Portfolio",
+            heroText: "Bekijk 50 voorbeelden van prachtige websites die wij hebben gemaakt",
+            gallery: "Portfolio Galerij",
+            footer: "© 2024 Website Makers"
+        },
+        en: {
+            title: "Website Makers",
+            subtitle: "Your Website, Our Expertise",
+            home: "Home",
+            ideas: "Ideas",
+            contact: "Contact",
+            heroTitle: "Discover Our Website Portfolio",
+            heroText: "View 50 examples of beautiful websites we created",
+            gallery: "Portfolio Gallery",
+            footer: "© 2024 Website Makers"
+        },
+        es: {
+            title: "Creadores Web",
+            subtitle: "Tu sitio web, nuestra experiencia",
+            home: "Inicio",
+            ideas: "Ideas",
+            contact: "Contacto",
+            heroTitle: "Descubre Nuestro Portafolio",
+            heroText: "Mira 50 ejemplos de sitios web increíbles",
+            gallery: "Galería de Portafolio",
+            footer: "© 2024 Creadores Web"
+        },
+        de: {
+            title: "Website Entwickler",
+            subtitle: "Ihre Website, unsere Expertise",
+            home: "Startseite",
+            ideas: "Ideen",
+            contact: "Kontakt",
+            heroTitle: "Entdecken Sie unser Portfolio",
+            heroText: "Sehen Sie 50 Beispiele unserer Websites",
+            gallery: "Portfolio Galerie",
+            footer: "© 2024 Website Entwickler"
+        }
+    };
+
+    function setLanguage(lang) {
+        const t = translations[lang];
+        document.getElementById("title-main").textContent = t.title;
+        document.getElementById("subtitle-main").textContent = t.subtitle;
+        document.getElementById("nav-home").textContent = t.home;
+        document.getElementById("nav-ideas").textContent = t.ideas;
+        document.getElementById("nav-contact").textContent = t.contact;
+        document.getElementById("hero-title").textContent = t.heroTitle;
+        document.getElementById("hero-text").textContent = t.heroText;
+        document.getElementById("gallery-title").textContent = t.gallery;
+        document.getElementById("footer-text").textContent = t.footer;
+    }
+</script>
+
+</body>
+</html>

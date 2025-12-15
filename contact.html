@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Website Makers - Contact</title>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="logo-section">
+            <div class="logo-placeholder">
+                <img src="images/logo.png" style="width: 90px;">
+            </div>
+            <div class="logo-text">
+                <h1 id="title-main">Website Makers</h1>
+                <p id="subtitle-main">Jouw Website, Onze Expertise</p>
+            </div>
+        </div>
+        <nav>
+            <a href="home.html" id="nav-home">Home</a>
+            <a href="ideas.html" id="nav-ideas">Ideas</a>
+            <a href="contact.html" id="nav-contact">Contact</a>
+            <select id="languageSelect">
+                <option value="nl">NL</option>
+                <option value="en">EN</option>
+                <option value="es">ES</option>
+                <option value="de">DE</option>
+            </select>
+        </nav>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <h2 id="hero-title">Contact ons!</h2>
+    <p id="hero-text">Stuur ons een bericht en we reageren binnen 24 uur!</p>
+
+    <form action="https://formspree.io/f/xovgzenw" method="POST">
+        <input type="text" name="name" id="input-name" placeholder="Vul je naam in" required>
+        <input type="email" name="email" id="input-email" placeholder="Vul een geldig e-mailadres in" required>
+        <textarea name="message" id="input-message" placeholder="Vul je bericht in" required></textarea>
+
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
+        <button type="submit" id="submit-button">VERSTUUR</button>
+    </form>
+</section>
+
+<footer id="contact">
+    <p id="footer-text">&copy; 2024 Website Makers. Alle rechten voorbehouden.</p>
+    <p style="margin-top: 0.5rem; opacity: 0.8;">
+        Contact: info@websitemakers.nl |
+    </p>
+</footer>
+
+<script>
+const translations = {
+    nl: {
+        title: "Website Makers",
+        subtitle: "Jouw Website, Onze Expertise",
+        home: "Home",
+        ideas: "Ideas",
+        contact: "Contact",
+        heroTitle: "Contact ons!",
+        heroText: "Stuur ons een bericht en we reageren binnen 24 uur!",
+        namePlaceholder: "Vul je naam in",
+        emailPlaceholder: "Vul een geldig e-mailadres in",
+        messagePlaceholder: "Vul je bericht in",
+        submit: "VERSTUUR",
+        footer: "© 2024 Website Makers. Alle rechten voorbehouden."
+    },
+    en: {
+        title: "Website Makers",
+        subtitle: "Your Website, Our Expertise",
+        home: "Home",
+        ideas: "Ideas",
+        contact: "Contact",
+        heroTitle: "Contact us!",
+        heroText: "Send us a message and we will respond within 24 hours!",
+        namePlaceholder: "Enter your name",
+        emailPlaceholder: "Enter a valid email address",
+        messagePlaceholder: "Enter your message",
+        submit: "SUBMIT",
+        footer: "© 2024 Website Makers. All rights reserved."
+    },
+    es: {
+        title: "Creadores Web",
+        subtitle: "Tu sitio web, nuestra experiencia",
+        home: "Inicio",
+        ideas: "Ideas",
+        contact: "Contacto",
+        heroTitle: "¡Contáctanos!",
+        heroText: "Envíanos un mensaje y responderemos en 24 horas.",
+        namePlaceholder: "Introduce tu nombre",
+        emailPlaceholder: "Introduce un correo válido",
+        messagePlaceholder: "Introduce tu mensaje",
+        submit: "ENVIAR",
+        footer: "© 2024 Creadores Web. Todos los derechos reservados."
+    },
+    de: {
+        title: "Website Entwickler",
+        subtitle: "Ihre Website, unsere Expertise",
+        home: "Startseite",
+        ideas: "Ideen",
+        contact: "Kontakt",
+        heroTitle: "Kontaktieren Sie uns!",
+        heroText: "Senden Sie uns eine Nachricht – wir antworten innerhalb von 24 Stunden.",
+        namePlaceholder: "Geben Sie Ihren Namen ein",
+        emailPlaceholder: "Geben Sie eine gültige E-Mail ein",
+        messagePlaceholder: "Geben Sie Ihre Nachricht ein",
+        submit: "SENDEN",
+        footer: "© 2024 Website Entwickler. Alle Rechte vorbehalten."
+    }
+};
+
+function setLanguage(lang) {
+    const t = translations[lang];
+    document.getElementById("title-main").textContent = t.title;
+    document.getElementById("subtitle-main").textContent = t.subtitle;
+    document.getElementById("nav-home").textContent = t.home;
+    document.getElementById("nav-ideas").textContent = t.ideas;
+    document.getElementById("nav-contact").textContent = t.contact;
+    document.getElementById("hero-title").textContent = t.heroTitle;
+    document.getElementById("hero-text").textContent = t.heroText;
+    document.getElementById("input-name").placeholder = t.namePlaceholder;
+    document.getElementById("input-email").placeholder = t.emailPlaceholder;
+    document.getElementById("input-message").placeholder = t.messagePlaceholder;
+    document.getElementById("submit-button").textContent = t.submit;
+    document.getElementById("footer-text").textContent = t.footer;
+}
+
+document.getElementById("languageSelect").addEventListener("change", function () {
+    setLanguage(this.value);
+});
+</script>
+
+</body>
+</html>
